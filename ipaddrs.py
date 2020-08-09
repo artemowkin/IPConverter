@@ -6,7 +6,7 @@ Examples
 $ python3 ipaddrs.py
 Hello! I'm an IP addresses converter!
 IP Address: 192.168.1.1
-> digit
+> decimal
 192.168.1.1
 > binary
 11000000101010000000000100000001
@@ -21,8 +21,8 @@ class IPAddr:
 
     Properties
     ----------
-    digit : str
-        Return IP address in digit format
+    decimal : str
+        Return IP address in decimal format
 
     binary : str
         Return IP address in binary format
@@ -32,7 +32,7 @@ class IPAddr:
     --------
 
     >>> ipaddr = IPAddr('192.168.1.1')
-    >>> ipaddr.digit
+    >>> ipaddr.decimal
     '192.168.1.1'
     >>> ipaddr.binary
     '11000000101010000000000100000001'
@@ -50,8 +50,8 @@ class IPAddr:
         self._binary_addr = None
 
     @property
-    def digit(self) -> str:
-        """Return IP address in digit format: XXXX.XXXX.XXXX.XXXX"""
+    def decimal(self) -> str:
+        """Return IP address in decimal format: XXXX.XXXX.XXXX.XXXX"""
         return self._addr
 
     @property
@@ -70,15 +70,22 @@ class IPAddr:
         return self._binary_addr
 
 
+def get_ip():
+    """Get IP from user"""
+    return IPAddr(input('IP Address: '))
+
+
 if __name__ == '__main__':
     print("Hello! I'm an IP addresses converter!")
-    ipaddr = IPAddr(input('IP Address: '))
+    ipaddr = get_ip()
     while True:
         command = input('> ')
         if command.lower() == 'binary':
             print(ipaddr.binary)
-        elif command.lower() == 'digit':
-            print(ipaddr.digit)
+        elif command.lower() == 'decimal':
+            print(ipaddr.decimal)
+        elif command.lower() == 'new':
+            ipaddr = get_ip()
         elif command.lower() == 'exit':
             break
         else:
